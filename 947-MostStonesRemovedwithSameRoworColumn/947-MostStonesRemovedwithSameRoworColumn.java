@@ -1,4 +1,4 @@
-// Last updated: 6/1/2026, 1:26:21 PM
+// Last updated: 6/1/2026, 1:31:05 PM
 1class Solution {
 2    class DisjointSet{
 3        int[] size;
@@ -47,8 +47,8 @@
 46            hm.put(nodeCol,1);
 47        }
 48        int count=0;
-49        for(Map.Entry<Integer,Integer> it:hm.entrySet()){
-50            if(ds.FindParent(it.getKey())==it.getKey()){
+49        for(int key:hm.keySet()){
+50            if(ds.FindParent(key)==key){
 51                count++;
 52            }
 53        }
