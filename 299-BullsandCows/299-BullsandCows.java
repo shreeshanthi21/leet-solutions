@@ -1,4 +1,4 @@
-// Last updated: 6/11/2026, 10:08:14 PM
+// Last updated: 6/12/2026, 9:08:02 PM
 1class Solution {
 2    public String getHint(String secret, String guess) {
 3        int bulls = 0;
