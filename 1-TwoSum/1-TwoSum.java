@@ -1,14 +1,14 @@
-// Last updated: 5/26/2026, 12:35:05 PM
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> hm = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            if (hm.containsKey(complement)) {
-                return new int[] { hm.get(complement), i };
-            }
-            hm.put(nums[i], i);
-        }
-        return new int[] {};
-    }
-}
+// Last updated: 6/13/2026, 9:10:32 PM
+1class Solution {
+2    public int[] twoSum(int[] nums, int target) {
+3        HashMap<Integer, Integer> hm = new HashMap<>();
+4        for (int i = 0; i < nums.length; i++) {
+5            int complement = target - nums[i];
+6            if (hm.containsKey(complement)) {
+7                return new int[] { hm.get(complement), i };
+8            }
+9            hm.put(nums[i], i);
+10        }
+11        return new int[] {};
+12    }
+13}
