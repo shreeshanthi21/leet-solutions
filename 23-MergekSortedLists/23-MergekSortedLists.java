@@ -1,4 +1,4 @@
-// Last updated: 6/22/2026, 10:10:01 PM
+// Last updated: 6/24/2026, 11:37:10 PM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -50,4 +50,3 @@
 49        return dummy.next;
 50    }
 51}
-52
