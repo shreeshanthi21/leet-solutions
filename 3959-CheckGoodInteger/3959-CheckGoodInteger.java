@@ -1,4 +1,4 @@
-// Last updated: 6/18/2026, 2:56:01 PM
+// Last updated: 6/25/2026, 11:39:14 PM
 1class Solution {
 2    public boolean checkGoodInteger(int n) {
 3        int temp1=n;
