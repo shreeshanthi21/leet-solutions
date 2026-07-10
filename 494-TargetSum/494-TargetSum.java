@@ -1,39 +1,31 @@
-// Last updated: 7/1/2026, 7:37:32 PM
+// Last updated: 7/10/2026, 3:25:25 PM
 1class Solution {
-2    private static final int MOD = (int)1e9 + 7;
-3    private int func(int[] arr, int target) {
-4        int n = arr.length;
-5        int[][] dp = new int[n][target + 1];
-6
-7        if (arr[0] == 0) 
-8            dp[0][0] = 2;   
-9        else
-10            dp[0][0] = 1;  
-11
-12        if (arr[0] != 0 && arr[0] <= target)
-13            dp[0][arr[0]] = 1;  
-14
-15        for (int ind = 1; ind < n; ind++) {
-16            for (int tar = 0; tar <= target; tar++) {
-17                int notTaken = dp[ind - 1][tar];
-18
-19                int taken = 0;
-20                if (arr[ind] <= tar)
-21                    taken = dp[ind - 1][tar - arr[ind]];
-22
-23                dp[ind][tar] = (notTaken + taken) % MOD;
-24            }
-25        }
-26        return dp[n - 1][target];
-27    }
-28    public int findTargetSumWays(int[] nums, int target) {
-29        int totSum = 0;
-30        for (int num : nums) {
-31            totSum += num;
-32        }
-33        if (totSum - target < 0 || (totSum - target) % 2 != 0)
-34            return 0;  
-35
-36        return func(nums, (totSum - target) / 2);
-37    }
-38}
+2    
+3    public int findTargetSumWays(int[] arr, int target) {
+4        int n = arr.length; // 'n' needs to be defined
+5        int sum = 0;
+6        for (int i : arr) sum += i;
+7        
+8        // Edge cases: target cannot be greater than total sum, or smaller than negative total sum
+9        if (Math.abs(target) > sum) return 0;
+10        
+11        // (target + sum) must be even and non-negative
+12        // Using 'target' instead of 'd', and Math.abs to safely handle negative modulo
+13        if ((target + sum) < 0 || (target + sum) % 2 != 0) return 0;
+14        
+15        int t = (target + sum) / 2;
+16        
+17        // REDUCED: find count of subset with sum equal to t
+18        int[][] dp = new int[n + 1][t + 1];
+19        dp[0][0] = 1;
+20        for (int i = 1; i < n + 1; i++) {
+21            for (int j = 0; j < t + 1; j++) {
+22                if (arr[i - 1] <= j)
+23                    dp[i][j] = (dp[i - 1][j] + dp[i - 1][j - arr[i - 1]]) % 1000000007;
+24                else
+25                    dp[i][j] = dp[i - 1][j];
+26            }
+27        }
+28        return dp[n][t];
+29    }
+30}
