@@ -1,30 +1,28 @@
-// Last updated: 6/30/2026, 9:21:57 PM
+// Last updated: 7/10/2026, 4:54:49 PM
 1class Solution {
-2    final int mod = (int)1e9 + 7;
-3    private int func(int[] arr, int ind, int T, int[][] dp) {
-4        if (ind == 0) {
-5            if (T % arr[0] == 0)
-6                return T / arr[0];
-7            else
-8                return (int)1e9;
-9        }
-10        if (dp[ind][T] != -1)
-11            return dp[ind][T];
-12        int notTaken = func(arr, ind - 1, T, dp);
-13        int taken = (int)1e9;
-14        if (arr[ind] <= T)
-15            taken = 1 + func(arr, ind, T - arr[ind], dp);
-16        return dp[ind][T] = Math.min(notTaken, taken);
-17    }
-18
-19    public int coinChange(int[] coins, int amount) {
-20        int n = coins.length;
-21        int[][] dp = new int[n][amount + 1];
-22        for (int[] row : dp)
-23            Arrays.fill(row, -1);
-24        int ans = func(coins, n - 1, amount, dp);
-25        if (ans >= (int)1e9)
-26            return -1;
-27        return ans;
-28    }
-29}
+2    public int coinChange(int[] coins, int amount) {
+3        int n=coins.length;
+4        int[][] dp=new int[n+1][amount+1];
+5        
+6        for (int j = 0; j <= amount; j++) {
+7            dp[0][j] = amount + 1; 
+8        }
+9        
+10        // 0 coins are needed to make an amount of 0
+11        for (int i = 0; i <= n; i++) {
+12            dp[i][0] = 0;
+13        }
+14        
+15        for(int i=1;i<n+1;i++){
+16            for(int j=1;j<amount+1;j++){
+17                if(coins[i-1]<=j){
+18                    dp[i][j] = Math.min(1 + dp[i][j - coins[i - 1]], dp[i - 1][j]);
+19                }
+20                else{
+21                    dp[i][j]=dp[i-1][j];
+22                }
+23            }
+24        }
+25        return dp[n][amount]>amount?-1:dp[n][amount];
+26    }
+27}
